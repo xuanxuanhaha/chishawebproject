@@ -21,7 +21,7 @@ if(isset($postdata) && !empty($postdata))
 //   }
 
   // Sanitize.
-  $userID = '112';
+  $userID = rand(10000000,99999999);
   $firstName = mysqli_real_escape_string($con, trim($request->data->firstName));
   $middleName = mysqli_real_escape_string($con, trim($request->data->middleName));
   $lastName = mysqli_real_escape_string($con, trim($request->data->lastName));
@@ -50,16 +50,13 @@ if(isset($postdata) && !empty($postdata))
       'address'=>$address
     ];
     echo json_encode(['data'=>$user]);
-    checkuserID('1');
+    $sql = mysqli_query($con,"SELECT * FROM users");
+    echo $sql;
   }
   else
   {
     http_response_code(422);
   }
-}
- function checkuserID($userID){
-  $sql = mysql_query("SELECT 'firstName' FROM 'users';");
-  echo $sql;
 }
 
 
